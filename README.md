@@ -5,23 +5,23 @@
 
 Wall-E needs your help! He is trying to find his way to Eve. He knows his surrounding map environment and all the obstacles on the map. He also knows the Eve's coordinates on the map. However, he doesn't have an algorithm that will tell him the efficient path to reach Eve.
 
-# Objective
+## Objective
 
 Your mission is to build a web server for Wall-E. He will make HTTP requests to your server to obtain an efficient route to reach Eve. The following is the set of endpoints your server needs to support. For the sake of simplicity, endpoints are not strictly RESTful. There is only one map on the server and it should be stored in memory.
 
-## Create Map
+### Create Map
 
 Request to instantiate a map on the server. We can imagine that a map is essentially a 2D Cartesian plane
 
-- Path: /api/maps
+- Path: `/api/maps`
 - Method: **POST**
 - Request Data
-    - `row`: integer
-    - `col`: integer
+    * `row`: integer
+    * `col`: integer
 - Response Data
-    - `http_status`: integer
-    - `row`: integer
-    - `col`: integer
+    * `http_status`: integer
+    * `row`: integer
+    * `col`: integer
 
 ```python
 import requests
@@ -32,11 +32,11 @@ print(r.status_code, r.reason, r.json())
 
     201 Created {'row': 5, 'col': 5}
 
-## Create Start
+### Create Start
 
-Request to set a start position on the map, i.e. where Wall-E currently is.
+Request to create a start position on the map, i.e. where Wall-E currently is.
 
-- Path: /api/paths/start
+- Path: `/api/paths/start`
 - Method: **POST**
 - Request Data
     - `i`: integer
@@ -46,11 +46,11 @@ Request to set a start position on the map, i.e. where Wall-E currently is.
     - `i`: integer
     - `j`: integer
 
-## Create Goal
+### Create Goal
 
-Request to set a goal position on the map, i.e. where Eve currently is.
+Request to create a goal position on the map, i.e. where Eve currently is.
 
-- Path: /api/paths/goal
+- Path: `/api/paths/goal`
 - Method: **POST**
 - Request Data
     - `i`: integer
@@ -73,11 +73,11 @@ print(r.status_code, r.reason, r.json())
     201 Created {'i': 0, 'j': 0}
     201 Created {'i': 4, 'j': 4}
 
-## Create Heuristic Cost
+### Create Heuristic Cost
 
-Request to a list of cost values on the map, i.e. where the obstacles are.
+Request to create a list of cost values on the map, i.e. where the obstacles are.
 
-- Path: /api/costs
+- Path: `/api/costs`
 - Method: **POST**
 - Request Data
     - `costs`: `[]{ i: integer, j: integer, value: float }`
@@ -90,33 +90,33 @@ import requests
 
 r = requests.post("http://localhost:3000/api/costs", json={
     'costs': [
-        {'i': 0, 'j': 1, 'value': 10},
-        {'i': 1, 'j': 1, 'value': 10},
-        {'i': 3, 'j': 0, 'value': 10},
-        {'i': 3, 'j': 1, 'value': 10},
-        {'i': 1, 'j': 3, 'value': 10},
-        {'i': 2, 'j': 3, 'value': 10},
-        {'i': 3, 'j': 3, 'value': 10},
+        {'i': 0, 'j': 1, 'value': 10.0},
+        {'i': 1, 'j': 1, 'value': 10.0},
+        {'i': 3, 'j': 0, 'value': 10.0},
+        {'i': 3, 'j': 1, 'value': 10.0},
+        {'i': 1, 'j': 3, 'value': 10.0},
+        {'i': 2, 'j': 3, 'value': 10.0},
+        {'i': 3, 'j': 3, 'value': 10.0},
     ]
 })
 print(r.status_code, r.reason, r.json())
 ```
 
     201 Created {'costs': [
-        {'i': 0, 'j': 1, 'value': 10},
-        {'i': 1, 'j': 1, 'value': 10},
-        {'i': 3, 'j': 0, 'value': 10},
-        {'i': 3, 'j': 1, 'value': 10},
-        {'i': 1, 'j': 3, 'value': 10},
-        {'i': 2, 'j': 3, 'value': 10},
-        {'i': 3, 'j': 3, 'value': 10}
+        {'i': 0, 'j': 1, 'value': 10.0},
+        {'i': 1, 'j': 1, 'value': 10.0},
+        {'i': 3, 'j': 0, 'value': 10.0},
+        {'i': 3, 'j': 1, 'value': 10.0},
+        {'i': 1, 'j': 3, 'value': 10.0},
+        {'i': 2, 'j': 3, 'value': 10.0},
+        {'i': 3, 'j': 3, 'value': 10.0}
     ]}
 
-## Find Path
+### Find Path
 
 Request to find the optimal path to reach goal (Eve).
 
-- Path: /api/paths
+- Path: `/api/paths`
 - Method: **GET**
 - Request Data
     - none
@@ -144,11 +144,11 @@ print(r.status_code, r.reason, r.json())
         {'i': 0, 'j': 0}
     ]}
 
-# Comments
+## Comments
 
 ![Wall-E and Eve](imgs/wall-e-and-eve.jpg)
 
-## Requirements
+### Recommendation
 
 At Fetch Robotics, we use Go, Python and C++ for our backend services. However, they are not required for this project. We are language agnostic. What we want to see is how you structure your code and how you approach the problem. Here's a list of recommended languages and frameworks to speed up your development time.
 
@@ -158,7 +158,7 @@ At Fetch Robotics, we use Go, Python and C++ for our backend services. However, 
 - Sinatra (or Rails) with Ruby
 - Spring with Java
 
-## Bonus
+### Bonus
 
 If you find this project is too easy, we got some bonus points for you.
 
@@ -166,6 +166,6 @@ If you find this project is too easy, we got some bonus points for you.
 - Write unit tests for your algorithms
 - Visualize the path with a frontend application
 
-## Submission
+### Submission
 
 Please upload your code to GitHub or zip it and email it to cfeng@fetchrobotics.com. Also include instruction to run your server, if it has a Dockerfile then that's even better.
