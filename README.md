@@ -3,7 +3,7 @@
 
 ![Wall-E needs your help](imgs/wall-e.png)
 
-He is trying to find his way to Eve. He knows his surrounding map environment and all the obstacles on the map. He also knows the Eve's coordinates on the map. However, he doesn't have an algorithm that will tell him the efficient path to reach Eve.
+Wall-E needs your help! He is trying to find his way to Eve. He knows his surrounding map environment and all the obstacles on the map. He also knows the Eve's coordinates on the map. However, he doesn't have an algorithm that will tell him the efficient path to reach Eve.
 
 # Objective
 
